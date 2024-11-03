@@ -1,0 +1,27 @@
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    & button {
+        padding: 10px 20px;
+        border: 4px solid black;
+        background-color: #59B0C8;
+        color: white;
+        border-radius: 8px;
+        font-family: var(--font-secondary);
+        font-weight: 400;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        outline: none;
+        box-shadow: 4px 4px 0px rgb(0, 0, 0);
+
+        &:hover {
+            background-color: rgba(1, 240, 33, 0.76);
+            transform: scale(1.1);
+        }
+    }
+}

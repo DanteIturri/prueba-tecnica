@@ -1,0 +1,11 @@
+.container-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .portal {
+    width: 600px;
+    height: auto;
+    filter: drop-shadow(9px 9px 0 black);
+  }
+}
