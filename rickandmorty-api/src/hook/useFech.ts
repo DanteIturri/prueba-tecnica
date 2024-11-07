@@ -14,9 +14,7 @@ export const useFetch = (url: string , currentPage: number) => {
       const data = await response.json()
       setData(data.results)
       setInfoPages(data.info.pages)
-      setTimeout(() => {
-        setLoading(false)
-      }, 1000)
+      setLoading(false)
     } catch (error) {
       setError(error as string)
       setLoading(false)

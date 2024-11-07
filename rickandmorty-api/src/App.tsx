@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Header } from './components/header/Header';
 import { Nav } from './components/nav/Nav';
 import { Inicio } from './pages/Inicio';
-import { Footer } from './components/footer/footer';
+import { Footer } from './components/footer/Footer';
 import { GridEpisodes } from './components/grid-episodios/GridEpisodios';
 import { GridLocations } from './components/grid-locations/GridLocations';
 import { GridCharacters } from './components/grid-characters/GridCharacters';

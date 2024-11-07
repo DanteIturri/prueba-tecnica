@@ -1,62 +1,33 @@
 .grid-episodes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px; 
-    padding: 16px; 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 16px;
 
-    & .card-episode {
-        background-color: #fff; 
-        border: 8px solid #2C7A8E;
-        border-radius: 8px;
-        box-shadow: -6px 6px 0px #000000; 
-        overflow: hidden;
-        border: ;
-       
-        & .card-content {
-            padding: 10px;
-            & h2 {
-                font-size: 18px;
-                font-family: var(--font-primary);
-                font-weight: 400;
-            }
+  & .card-episode {
+    background-color: #fff;
+    border: 8px solid #2C7A8E;
+    border-radius: 8px;
+    box-shadow: -6px 6px 0px #000000;
+    overflow: hidden;
+    border: ;
 
-            & p {
-                font-size: 14px;
-                font-family: var(--font-secondary);
-                font-weight: 700;
-                color: #59B0C8;
-            }
-        }
-    }
-}
-.pagination {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-    gap: 10px;
-    & span {
+    & .card-content {
+      padding: 10px;
+
+      & h2 {
+        font-size: 18px;
+        font-family: var(--font-primary);
+        font-weight: 400;
+      }
+
+      & p {
         font-size: 14px;
+        font-family: var(--font-secondary);
         font-weight: 700;
         color: #59B0C8;
+      }
     }
-    & button {
-        padding: 5px 10px;
-        border: none;
-        background-color: #59B0C8;
-        color: white;
-        border-radius: 5px;        
-        font-weight: 700;
-        font-size: 14px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        outline: none;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
-        &:hover {
-            background-color: #2C7A8E;
-            transform: scale(1.1);
-        }
-    }
+  }
 }
+

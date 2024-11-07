@@ -1,36 +1,17 @@
 import { FC, useState } from 'react';
 import { ItemCharacter } from './ItemCharacter';
-import { CardLoading } from './CardLoading';
 import { Pagination } from '../pagination/Pagination';
-import { SaveButton } from './saveButton';
+import { SaveButton } from './SaveButton';
 import { useFetch } from '../../hook/useFech';
+import { URl_API } from '../../constans/Url';
+import { Character } from '../../types/Characters';
 import 'boxicons/css/boxicons.min.css';
 import './grid-characters.css';
-
-type Character = {
-  id: number;
-  name: string;
-  status: string; 
-  species: string;
-  type: string;
-  gender: string; 
-  origin: Location; 
-  location: Location; 
-  image: string; 
-  episode: string[];
-  url: string; 
-  created: string;
-};
-
-interface Location {  
-  name: string; 
-  url: string; 
-}
-
+import { CardLoader } from '../card-loader/CardLoader';
 export const GridCharacters: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, loading, error, infoPages } = useFetch(
-    'https://rickandmortyapi.com/api/character',
+    URl_API + 'character',
     currentPage
   );
 
@@ -44,7 +25,7 @@ export const GridCharacters: FC = () => {
       <div className="grid-character">
         {data.map((character: Character) =>
           loading ? (
-            <CardLoading key={character.id}/>
+            <CardLoader key={character.id}  isImage={true} />
           ) : (
             <ItemCharacter key={character.id} character={character} />
           )

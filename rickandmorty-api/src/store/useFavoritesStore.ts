@@ -1,29 +1,13 @@
 import { create } from 'zustand';
+import { URL_API_BACKEND } from '../constans/Url';
 
-interface FavoriteItem {
-    id: number;
-    name: string;
-    image: string;
-    species: string;
-    status: string;
-}
-
-
-interface FavoritesState {
-    tempFavorites: FavoriteItem[]; // Temporales hasta que se guarden
-    favorites: FavoriteItem[]; // Cargados desde la base de datos
-    addTempFavorite: (item: FavoriteItem) => void;
-    removeTempFavorite: (id: number) => void;
-    isTempFavorite: (id: number) => boolean;
-    saveFavorites: () => Promise<void>; // Guardar todos los favoritos seleccionados en la base de datos
-    fetchFavorites: () => void;
-  }
+import { FavoritesState } from '../types/Favorites';
 
 const useFavoritesStore = create<FavoritesState>((set, get) => ({
     tempFavorites: [],
     favorites: [],
     fetchFavorites: async () => {
-        const response = await fetch('http://localhost:5000/api/characters');
+        const response = await fetch(URL_API_BACKEND);
         const data = await response.json();
         set({ favorites: data });
     },
@@ -44,7 +28,7 @@ const useFavoritesStore = create<FavoritesState>((set, get) => ({
         
         for (const item of tempFavorites) {
             try {
-                const response = await fetch('http://localhost:5000/api/characters', {
+                const response = await fetch(URL_API_BACKEND, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
