@@ -17,8 +17,14 @@ export const ItemCharacter: FC<{ character: Character }> = ({ character }) => {
     }
   };
 
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  const openModal = () => {
+    setModalOpen(true);
+    document.body.style.overflow = 'hidden'; // Disable scrolling when modal is open
+  };
+  const closeModal = () =>{
+    setModalOpen(false);
+    document.body.style.overflow = 'auto'; // Enable scrolling when modal is closed
+  }
 
   return (
     <>

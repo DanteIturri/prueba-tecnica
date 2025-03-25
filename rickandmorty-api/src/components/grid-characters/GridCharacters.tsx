@@ -1,43 +1,52 @@
 import 'boxicons/css/boxicons.min.css';
-import { FC, useState } from 'react';
-import { URl_API } from '../../constans/Url';
-import { useFetch } from '../../hook/useFech';
-import { Character } from '../../types/Characters';
+import { FC, useEffect, useState } from 'react';
+import { useCharacters } from '../../hook/useCharacters';
 import { CardLoader } from '../card-loader/CardLoader';
 import { Pagination } from '../pagination/Pagination';
 import './grid-characters.css';
 import { ItemCharacter } from './ItemCharacter';
 import { SaveButton } from './SaveButton';
+
 export const GridCharacters: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, loading, error, infoPages } = useFetch(
-    URl_API + 'character',
-    currentPage
-  );
+  const { data, error, isLoading } = useCharacters(currentPage);
+
+  const infoPages = data?.info.pages || 0;
+  const URl_API = 'https://rickandmortyapi.com/api/';
+
+  useEffect(() => {
+    // Prefetch siguiente página
+    if (currentPage < infoPages) {
+      const prefetchNextPage = async () => {
+        const nextPageUrl = `${URl_API}character?page=${currentPage + 1}`;
+        await fetch(nextPageUrl);
+      };
+      prefetchNextPage();
+    }
+  }, [currentPage, infoPages]);
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {(error as Error)?.message || 'An error occurred'}</div>;
   }
 
   return (
     <>
       <SaveButton />
       <div className="grid-character">
-        {loading ? (
-          // Show a predetermined number of skeleton loaders when loading
+        {isLoading ? (
+          // Mostrar skeletons durante la carga
           Array.from({ length: 20 }).map((_, index) => (
             <CardLoader key={`skeleton-${index}`} isImage={true} />
           ))
         ) : (
-          // Only map through data when not loading
-          data?.map((character: Character) => (
+          data?.results.map((character) => (
             <ItemCharacter key={character.id} character={character} />
           ))
         )}
       </div>
       <Pagination
         currentPage={currentPage}
-        totalPages={infoPages as number}
+        totalPages={data?.info.pages || 0}
         onPageChange={setCurrentPage}
       />
     </>
