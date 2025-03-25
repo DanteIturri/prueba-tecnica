@@ -1,13 +1,13 @@
-import { FC, useState } from 'react';
-import { ItemCharacter } from './ItemCharacter';
-import { Pagination } from '../pagination/Pagination';
-import { SaveButton } from './SaveButton';
-import { useFetch } from '../../hook/useFech';
-import { URl_API } from '../../constans/Url';
-import { Character } from '../../types/Characters';
 import 'boxicons/css/boxicons.min.css';
-import './grid-characters.css';
+import { FC, useState } from 'react';
+import { URl_API } from '../../constans/Url';
+import { useFetch } from '../../hook/useFech';
+import { Character } from '../../types/Characters';
 import { CardLoader } from '../card-loader/CardLoader';
+import { Pagination } from '../pagination/Pagination';
+import './grid-characters.css';
+import { ItemCharacter } from './ItemCharacter';
+import { SaveButton } from './SaveButton';
 export const GridCharacters: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, loading, error, infoPages } = useFetch(
@@ -23,12 +23,16 @@ export const GridCharacters: FC = () => {
     <>
       <SaveButton />
       <div className="grid-character">
-        {data.map((character: Character) =>
-          loading ? (
-            <CardLoader key={character.id}  isImage={true} />
-          ) : (
+        {loading ? (
+          // Show a predetermined number of skeleton loaders when loading
+          Array.from({ length: 20 }).map((_, index) => (
+            <CardLoader key={`skeleton-${index}`} isImage={true} />
+          ))
+        ) : (
+          // Only map through data when not loading
+          data?.map((character: Character) => (
             <ItemCharacter key={character.id} character={character} />
-          )
+          ))
         )}
       </div>
       <Pagination

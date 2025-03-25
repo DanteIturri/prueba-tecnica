@@ -1,0 +1,39 @@
+
+.card-loading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  & .skeleton-image {
+    width: 298px;
+    height: 298px;
+    background-color: #e0e0e0;
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+
+
+  & .skeleton-text {
+    height: 16px;
+    width: 100%;
+    background-color: #e0e0e0;
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+
+  & .skeleton-text.short {
+    width: 60%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #e0e0e0;
+  }
+
+  50% {
+    background-color: #807f7f;
+  }
+
+  100% {
+    background-color: #e0e0e0;
+  }
+}
